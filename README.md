@@ -1,8 +1,20 @@
 Amazon.in Laptop Scraper
-📘 Overview
-This Python script scrapes Amazon.in search results for laptop listings and extracts the following information for each product:
 
-🖼 Image (product thumbnail URL)
+
+📘 Overview
+This project is a simple Python web scraper that collects laptop listings from Amazon.in search results and saves them into a CSV file.
+The script automatically extracts key product details, such as image, title, rating, price, and whether the item is an Ad (sponsored) or Organic result.
+
+🧠 What the Script Does
+When executed, the script:
+
+Sends a request to the Amazon search results page for a keyword (default: laptop).
+
+Parses the HTML using BeautifulSoup.
+
+Extracts information for each product:
+
+🖼 Image URL
 
 🏷 Title
 
@@ -10,72 +22,58 @@ This Python script scrapes Amazon.in search results for laptop listings and extr
 
 💰 Price
 
-🏷 Ad / Organic Result
-
 🔗 Product URL
 
-🔢 ASIN
+📦 ASIN (Amazon Product ID)
 
-All collected data are saved into a timestamped CSV file for later analysis.
+🏷 Ad / Organic label
 
-⚙️ Features
-✅ Automatically fetches multiple pages of search results
-✅ Extracts key product fields from each listing
-✅ Detects whether a listing is sponsored (Ad) or organic
-✅ Saves clean data in CSV format with a timestamp in the filename
-✅ Polite scraping – adds randomized delays and header rotation to avoid blocking
-
-🧠 How It Works
-Sends an HTTP GET request to the Amazon.in search results page for "laptop"
-
-Parses the HTML response using BeautifulSoup
-
-Locates each product container via data-asin attribute
-
-Extracts:
-
-product title and URL
-
-image link
-
-price and rating
-
-sponsored label (if any)
-
-Repeats the process for the specified number of pages
-
-Combines all results into a single pandas DataFrame
-
-Writes output to a file like
+Saves the scraped data into a timestamped CSV file, such as
 
 amazon_laptops_laptop_20251116_101523.csv
+⚙️ Features
+✅ Scrapes multiple pages of Amazon search results
+✅ Automatically detects “Sponsored” (Ad) vs “Organic” products
+✅ Randomized user-agents and request delays to reduce blocking
+✅ Saves output in a clean CSV format with a unique timestamp
+✅ Easy-to-modify, lightweight, and requires only standard Python libraries
+
 🧩 Requirements
+Make sure Python 3.8 or later is installed.
+
 Install dependencies:
-
 pip install requests beautifulsoup4 pandas lxml
-▶️ Usage
-Run the script from a terminal:
 
+▶️ How to Run the Script
+🪜 Step-by-Step Instructions
+
+1. Clone or download the repository
+git clone https://github.com/<yourusername>/amazon-laptop-scraper.git
+cd amazon-laptop-scraper
+
+3. Create and activate a virtual environment (recommended)
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# macOS / Linux
+source venv/bin/activate
+
+4. Install dependencies
+   
+pip install -r requirements.txt
+
+6. Run the scraper
+   
 python amazon_laptop_scraper.py --query "laptop" --pages 3
-Arguments
 
-Parameter	Description	Default
---query	Search term (e.g., "laptop", "gaming laptop")	laptop
---pages	Number of result pages to scrape	3
-Example output
+Example Output Columns
 
-[+] Fetching page 1 for 'laptop' ...
-[+] Fetching page 2 for 'laptop' ...
-[+] Fetching page 3 for 'laptop' ...
-[+] Saved 64 rows to amazon_laptops_laptop_20251116_101523.csv
-Open the CSV in Excel / pandas / Sheets to view product data.
-
-📂 Output Columns
-Column	Description
-asin	Amazon product identifier
-title	Product title
-price	Listed price (text format)
-rating	Customer rating string
-image	Product image URL
-product_url	Direct Amazon link
-ad_or_organic	Either “Ad” or “Organic” based on sponsored labels
+| Column          | Description              |
+| --------------- | ------------------------ |
+| `asin`          | Amazon product ID        |
+| `title`         | Product name             |
+| `price`         | Price text (₹ included)  |
+| `rating`        | Customer rating          |
+| `image`         | Product image URL        |
+| `product_url`   | Direct product page link |
+| `ad_or_organic` | Shows “Ad” or “Organic”  |
