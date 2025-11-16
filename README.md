@@ -1,4 +1,4 @@
-🧾 Task 1 – Amazon.in Laptop Scraper
+Amazon.in Laptop Scraper
 📘 Overview
 This Python script scrapes Amazon.in search results for laptop listings and extracts the following information for each product:
 
@@ -69,3 +69,13 @@ Example output
 [+] Fetching page 3 for 'laptop' ...
 [+] Saved 64 rows to amazon_laptops_laptop_20251116_101523.csv
 Open the CSV in Excel / pandas / Sheets to view product data.
+
+📂 Output Columns
+Column	Description
+asin	Amazon product identifier
+title	Product title
+price	Listed price (text format)
+rating	Customer rating string
+image	Product image URL
+product_url	Direct Amazon link
+ad_or_organic	Either “Ad” or “Organic” based on sponsored labels
